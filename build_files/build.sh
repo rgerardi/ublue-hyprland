@@ -37,4 +37,4 @@ dnf5 copr -y disable solopasha/hyprland
 ## Install updated version of Tailscale
 curl https://pkgs.tailscale.com/stable/fedora/tailscale.repo -O --output-dir /etc/yum.repos.d/
 
-dnf5 install -y tailscale
+dnf5 install -y --best tailscale
