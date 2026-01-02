@@ -25,7 +25,65 @@ dnf5 group install -y --with-optional virtualization
 dnf5 copr -y enable solopasha/hyprland
 dnf5 copr -y enable ublue-os/packages
 
-dnf5 -y install hyprland hyprpaper hyprlock hypridle hyprpolkitagent curl chafa foot foot-terminfo dunst waybar wl-clipboard nwg-bar nwg-look imv wev zsh zsh-autosuggestions zsh-syntax-highlighting SDL2_image SDL3_image SDL3_ttf breeze-cursor-theme breeze-gtk-common breeze-gtk-gtk3 breeze-gtk-gtk4 breeze-icon-theme incus incus-agent f43-backgrounds-base fastfetch fprintd fprintd-pam gdisk glow cascadia-code-nf-fonts cascadia-mono-nf-fonts google-noto-sans-fonts google-noto-sans-mono-fonts google-noto-serif-fonts guestfs-tools gum iwd lm_sensors parted podman-compose podman-machine podman-tui powertop rclone socat tailscale tuned tuned-ppd ublue-brew ublue-os-libvirt-workarounds vulkan-tools xwaylandvideobridge borgbackup fontawesome-fonts-all
+dnf5 -y install SDL2_image \
+		SDL3_image \
+		SDL3_ttf \
+		borgbackup \
+		breeze-cursor-theme \
+		breeze-gtk-common \
+		breeze-gtk-gtk3 \
+		breeze-gtk-gtk4 \
+		breeze-icon-theme \
+		cascadia-fonts-all \
+		chafa \
+		curl \
+		dunst \
+		f43-backgrounds-base \
+		fastfetch \
+		fontawesome-fonts-all \
+		foot \
+		foot-terminfo \
+		fprintd \
+		fprintd-pam \
+		gdisk \
+		glow \
+		google-noto-sans-fonts \
+		google-noto-sans-mono-fonts \
+		google-noto-serif-fonts \
+		guestfs-tools \
+		gum \
+		hypridle \
+		hyprland \
+		hyprlock \
+		hyprpaper \
+		hyprpolkitagent \
+		imv \
+		incus \
+		incus-agent \
+		iwd \
+		jetbrains-mono-fonts-all \
+		lm_sensors \
+		nwg-bar \
+		nwg-look \
+		parted \
+		podman-compose \
+		podman-machine \
+		podman-tui \
+		powertop \
+		rclone \
+		socat \
+		tuned \
+		tuned-ppd \
+		ublue-brew \
+		ublue-os-libvirt-workarounds \
+		vulkan-tools \
+		waybar \
+		wev \
+		wl-clipboard \
+		xwaylandvideobridge \
+		zsh \
+		zsh-autosuggestions \
+		zsh-syntax-highlighting
 
 dnf5 copr -y disable ublue-os/packages
 dnf5 copr -y disable solopasha/hyprland
