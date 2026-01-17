@@ -9,11 +9,16 @@ set -ouex pipefail
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
+mkdir /nix
+
 dnf5 remove -y firefox.x86_64 firefox-langpacks.x86_64
+
+dnf5 remove -y sddm sddm-* kde-* kde* plasma-*
+
+dnf5 autoremove -y
 
 # this installs a package from fedora repos
 dnf5 install -y tmux 
-dnf5 group install -y --with-optional virtualization
 
 # Use a COPR Example:
 #
@@ -21,9 +26,6 @@ dnf5 group install -y --with-optional virtualization
 # dnf5 -y install package
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
-
-dnf5 copr -y enable solopasha/hyprland
-dnf5 copr -y enable ublue-os/packages
 
 dnf5 -y install SDL2_image \
 		SDL3_image \
@@ -52,17 +54,11 @@ dnf5 -y install SDL2_image \
 		google-noto-serif-fonts \
 		guestfs-tools \
 		gum \
-		hypridle \
-		hyprland \
-		hyprlock \
-		hyprpaper \
-		hyprpolkitagent \
 		imv \
-		incus \
-		incus-agent \
 		iwd \
 		jetbrains-mono-fonts-all \
 		lm_sensors \
+		nix-daemon \
 		nwg-bar \
 		nwg-look \
 		parted \
@@ -72,27 +68,15 @@ dnf5 -y install SDL2_image \
 		powertop \
 		rclone \
 		socat \
-		tuned \
-		tuned-ppd \
-		ublue-brew \
-		ublue-os-libvirt-workarounds \
 		vulkan-tools \
 		waybar \
 		wev \
 		wl-clipboard \
-		xwaylandvideobridge \
 		zsh \
 		zsh-autosuggestions \
 		zsh-syntax-highlighting
 
-dnf5 copr -y disable ublue-os/packages
-dnf5 copr -y disable solopasha/hyprland
-
 #### Example for enabling a System Unit File
 
 #systemctl enable podman.socket
-
-## Install updated version of Tailscale
-curl https://pkgs.tailscale.com/stable/fedora/tailscale.repo -O --output-dir /etc/yum.repos.d/
-
-dnf5 install -y --best tailscale
+systemctl enable nix-daemon.socket
