@@ -81,17 +81,15 @@ dnf5 -y install SDL2_image \
 #### Example for enabling a System Unit File
 
 #systemctl enable podman.socket
-systemctl enable --now nix-daemon.socket
-
 mkdir -p /etc/nix/hyprland
 
-cat > /etc/nix/nix.conf <<EOF
+cat <<'EOF' > /etc/nix/nix.conf
 # see https://nixos.org/manual/nix/stable/command-ref/conf-file
 sandbox = true
 experimental-features = nix-command flakes
 EOF
 
-cat > /etc/nix/hyprland/flake.nix <<EOF
+cat <<'EOF' > /etc/nix/hyprland/flake.nix
 {
   description = "Hyprland user environment";
 
@@ -119,5 +117,3 @@ EOF
 
 nix profile install --profile /nix/var/nix/profiles/default /etc/nix/hyprland
 nix profile install --profile /nix/var/nix/profiles/default github:guibou/nixGL --impure
-
-systemctl disable --now nix-daemon.socket
