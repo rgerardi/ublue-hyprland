@@ -115,5 +115,9 @@ cat <<'EOF' > /etc/nix/hyprland/flake.nix
 }
 EOF
 
-nix profile install --profile /nix/var/nix/profiles/default /etc/nix/hyprland
-nix profile install --profile /nix/var/nix/profiles/default github:guibou/nixGL --impure
+mkdir -p /var/roothome/.cache/nix
+
+nix profile add --profile /nix/var/nix/profiles/default /etc/nix/hyprland
+nix profile add --profile /nix/var/nix/profiles/default github:guibou/nixGL --impure
+
+rm -rf /var/roothome/.cache/nix
