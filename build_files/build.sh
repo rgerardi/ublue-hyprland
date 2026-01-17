@@ -13,7 +13,7 @@ mkdir /nix
 
 dnf5 remove -y firefox.x86_64 firefox-langpacks.x86_64
 
-dnf5 remove -y sddm sddm-* kde-* kde* plasma-*
+dnf5 remove -y sddm sddm-* kde-settings* plasma-*
 
 dnf5 autoremove -y
 
@@ -60,7 +60,6 @@ dnf5 -y install SDL2_image \
 		lm_sensors \
 		nix-daemon \
 		nwg-bar \
-		nwg-look \
 		parted \
 		podman-compose \
 		podman-machine \
