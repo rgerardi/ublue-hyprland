@@ -52,6 +52,7 @@ dnf5 -y install SDL2_image \
 		google-noto-sans-fonts \
 		google-noto-sans-mono-fonts \
 		google-noto-serif-fonts \
+		grim \
 		guestfs-tools \
 		gum \
 		imv \
@@ -67,10 +68,12 @@ dnf5 -y install SDL2_image \
 		powertop \
 		rclone \
 		socat \
+		slurp \
 		vulkan-tools \
 		waybar \
 		wev \
 		wl-clipboard \
+		wofi \
 		zsh \
 		zsh-autosuggestions \
 		zsh-syntax-highlighting
@@ -78,4 +81,43 @@ dnf5 -y install SDL2_image \
 #### Example for enabling a System Unit File
 
 #systemctl enable podman.socket
-systemctl enable nix-daemon.socket
+systemctl enable --now nix-daemon.socket
+
+mkdir -p /etc/nix/hyprland
+
+cat > /etc/nix/nix.conf <<EOF
+# see https://nixos.org/manual/nix/stable/command-ref/conf-file
+sandbox = true
+experimental-features = nix-command flakes
+EOF
+
+cat > /etc/nix/hyprland/flake.nix <<EOF
+{
+  description = "Hyprland user environment";
+
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+  outputs = { self, nixpkgs }:
+  let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs { inherit system; };
+  in {
+    packages.${system}.default =
+      pkgs.buildEnv {
+        name = "hyprland-env";
+        paths = with pkgs; [
+          hyprland
+          hypridle
+          hyprpaper
+          hyprlock
+          xdg-desktop-portal-hyprland
+        ];
+      };
+  };
+}
+EOF
+
+nix profile install --profile /nix/var/nix/profiles/default /etc/nix/hyprland
+nix profile install --profile /nix/var/nix/profiles/default github:guibou/nixGL --impure
+
+systemctl disable --now nix-daemon.socket
