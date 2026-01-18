@@ -108,7 +108,10 @@ cat <<'EOF' > /etc/nix/hyprland/flake.nix
           hypridle
           hyprpaper
           hyprlock
+		  hyprcursor
+		  hyprpolkitagent
           xdg-desktop-portal-hyprland
+		  fprintd
         ];
       };
   };
